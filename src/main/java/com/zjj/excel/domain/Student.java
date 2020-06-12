@@ -4,7 +4,10 @@ import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Date;
 
@@ -15,6 +18,9 @@ import java.util.Date;
 @Data
 //@HeadRowHeight(40)  //表头行高
 //@ContentRowHeight(50) //内容行高
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Student {
 
 
