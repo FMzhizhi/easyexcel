@@ -20,12 +20,12 @@ import java.util.stream.Collectors;
 public class TestStream {
 
     private List<Teacher> teachers= Arrays.asList(
-            new Teacher("1","明",new Date(),"男"),
-            new Teacher("2","哈哈",new Date(),"女"),
-            new Teacher("3","郑",new Date(),"男"),
-            new Teacher("4","陈",new Date(),"男"),
-            new Teacher("5","牛",new Date(),"男"),
-            new Teacher("6","我我",new Date(),"男")
+            new Teacher(1,"明",new Date(),"男", Teacher.Status.BUS),
+            new Teacher(2,"哈哈",new Date(),"女",Teacher.Status.FREE),
+            new Teacher(3,"郑",new Date(),"男",Teacher.Status.FREE),
+            new Teacher(4,"陈",new Date(),"男",Teacher.Status.VOCATION),
+            new Teacher(5,"支",new Date(),"男",Teacher.Status.BUS),
+            new Teacher(6,"我我",new Date(),"男",Teacher.Status.FREE)
     );
 
     @Test
@@ -84,6 +84,55 @@ public class TestStream {
         System.out.println(collect);
 
 
+    }
+    @Test
+    public void test5(){
+        List<Teacher> collect = teachers.stream().filter((s) -> s.getId() > 3).sorted(
+                Comparator.comparing(Teacher::getName, (x, y) -> {
+                    // ToFirstChar 将汉字首字母转为拼音
+                    x = ToFirstChar(x).toUpperCase();
+                    y = ToFirstChar(y).toUpperCase();
+                    Collator clt = Collator.getInstance();
+                    return clt.compare(x, y);
+                })
+        ).collect(Collectors.toList());
+        System.out.println(collect);
+
+
+    }
+    /*
+    * allMatch
+    * anyMATCH
+    * NONEMATCH
+    * FINDFIRST
+    * COUNT
+    * MAX
+    * MIN
+    *
+    * */
+
+    @Test
+    public void test6(){
+        boolean b = teachers.stream().anyMatch((e) -> e.getStatus().equals(Teacher.Status.FREE));
+        System.out.println(b);
+        List<Boolean> collect = teachers.stream().map((t) -> t.getStatus().equals(Teacher.Status.FREE)).collect(Collectors.toList());
+        List<Teacher> collect1 = teachers.stream().filter((t) -> t.getStatus().equals(Teacher.Status.FREE)).collect(Collectors.toList());
+        System.out.println(collect);
+        System.out.println(collect1);
+    }
+
+    @Test
+    public void test7(){
+//        Optional<Teacher.Status> first = teachers.stream().map((t) -> t.getStatus()).findFirst();
+//        System.out.println(first.get());
+//        long count = teachers.stream().count();
+//        System.out.println(count);
+//        Optional<Teacher> max = teachers.stream().max((e1, e2) -> (Double.compare(e1.getId(), e2.getId())));
+//        System.out.println(max);
+//        Optional<Teacher> min = teachers.stream().min((e, f) -> (Double.compare(e.getId(), f.getId())));
+//        System.out.println(min.get());
+        Optional<Integer> min = teachers.stream().map(Teacher::getId).min(Double::compare);
+        System.out.println(min.get());
     }
 
     /**

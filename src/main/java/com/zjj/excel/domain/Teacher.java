@@ -18,20 +18,26 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Teacher implements  Comparable<Teacher>{
+public class Teacher implements Comparable<Teacher> {
 
-    private String id;
-
+    private int id;
 
     private String name;
-
 
     private Date birthday;
 
     private String gender;
 
+    private Status status;
+
     @Override
     public int compareTo(Teacher o) {
         return this.name.compareTo(o.name);
+    }
+
+    public enum Status {
+        BUS,
+        FREE,
+        VOCATION
     }
 }
