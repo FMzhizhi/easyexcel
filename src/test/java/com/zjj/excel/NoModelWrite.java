@@ -1,6 +1,8 @@
 package com.zjj.excel;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
+import com.zjj.excel.utils.LongestMatchColumnWidth;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -22,7 +24,8 @@ public class NoModelWrite {
         // 写法1
         String fileName = "C:\\Users\\Administrator\\Desktop\\" + "noModelWrite" + System.currentTimeMillis() + ".xlsx";
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
-        EasyExcel.write(fileName).head(head()).sheet("模板").doWrite(dataList());
+        //设置自动行列宽
+        EasyExcel.write(fileName).head(head()).registerWriteHandler(new LongestMatchColumnWidth()).sheet("模板").doWrite(dataList());
     }
 
     private List<List<String>> head() {

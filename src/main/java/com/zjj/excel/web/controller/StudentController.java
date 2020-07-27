@@ -33,7 +33,6 @@ public class StudentController {
     @RequestMapping("/read")
     @ResponseBody
     public String readExcel(MultipartFile uploadExcel){
-        System.out.println("==================================99999999999999999");
         try {
             ExcelReaderBuilder readWorkBook = EasyExcel.read(uploadExcel.getInputStream(), Student.class, webStudentListener);
             ExcelReaderSheetBuilder sheet = readWorkBook.sheet();
