@@ -12,11 +12,23 @@ import com.alibaba.excel.write.metadata.fill.FillConfig;
 import com.zjj.excel.domain.FillData;
 import com.zjj.excel.domain.Student;
 import com.zjj.excel.listener.StudentReadListener;
+import com.zjj.excel.web.listener.NoModelDataListener;
 import org.junit.Test;
 
 import java.util.*;
 
 public class EasyExcelTest {
+
+    /**
+     * 不创建对象的读
+     */
+    @Test
+    public void noModelRead() {
+        String fileName = "学员信息表.xlsx";
+        // 这里 只要，然后读取第一个sheet 同步读取会自动finish
+        EasyExcel.read(fileName, new NoModelDataListener()).sheet().doRead();
+    }
+
     @Test
     public void testRead() {
         /**

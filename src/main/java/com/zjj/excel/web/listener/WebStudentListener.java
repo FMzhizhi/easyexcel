@@ -23,7 +23,7 @@ public class WebStudentListener extends AnalysisEventListener<Student> {
 
     @Override
     public void invoke(Student data, AnalysisContext context) {
-        System.out.println("cnm");
+
         list.add(data);
         if (list.size() %5 == 0){
             studentService.readExcel(list);

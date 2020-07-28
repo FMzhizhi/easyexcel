@@ -30,10 +30,14 @@ public class StudentController {
     @Autowired
     private WebStudentListener webStudentListener;
 
+    /**
+     * 导入
+     * @param uploadExcel
+     * @return
+     */
     @RequestMapping("/read")
     @ResponseBody
     public String readExcel(MultipartFile uploadExcel){
-        System.out.println("==================================99999999999999999");
         try {
             ExcelReaderBuilder readWorkBook = EasyExcel.read(uploadExcel.getInputStream(), Student.class, webStudentListener);
             ExcelReaderSheetBuilder sheet = readWorkBook.sheet();
@@ -46,6 +50,11 @@ public class StudentController {
         }
     }
 
+    /**
+     * 导出
+     * @param response
+     * @throws IOException
+     */
     @RequestMapping("/write")
     @ResponseBody
     public void writeExcel(HttpServletResponse response) throws IOException {
